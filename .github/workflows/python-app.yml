@@ -26,5 +26,6 @@ jobs:
 
     - name: Docker build and push to Artifact Registry
       run: |
+        gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://europe-west1-docker.pkg.dev
         docker build -t europe-west1-docker.pkg.dev/oredata-ops-demo/github-actions-test/python_flask:${{ github.sha }} .
         docker push europe-west1-docker.pkg.dev/oredata-ops-demo/github-actions-test/python_flask:${{ github.sha }}
