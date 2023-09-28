@@ -24,7 +24,7 @@ jobs:
       with:
         python-version: "3.10"
 
-    - name: Test
+    - name: Docker build and push to Artifact Registry
       run: |
-        pip3 install -r requirements.txt
-        python3 main.py
+        docker build -t europe-west1-docker.pkg.dev/oredata-ops-demo/github-actions-test/python_flask:${{ github.sha }} .
+        docker push europe-west1-docker.pkg.dev/oredata-ops-demo/github-actions-test/python_flask:${{ github.sha }}
