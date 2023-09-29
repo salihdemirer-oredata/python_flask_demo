@@ -50,7 +50,6 @@ on:
 
 env:
   PROJECT_ID: '${{ secrets.GCP_PROJ_ID }}' # TODO: update Google Cloud project id
-  GAR_LOCATION: '${{ env.LOCATION }}' # TODO: update Artifact Registry location
 
 jobs:
   deploy:
@@ -92,8 +91,8 @@ jobs:
 
       - name: Build and Push Container
         run: |-
-          docker build -t "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/github-actions-test/python-flask:${{ github.sha }}" ./
-          docker push "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/github-actions-test/python-flask:${{ github.sha }}"
+          docker build -t "${{ env.LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/github-actions-test/python-flask:${{ github.sha }}" ./
+          docker push "${{ env.LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/github-actions-test/python-flask:${{ github.sha }}"
 
       - name: Show Output
         run: echo ${{ steps.deploy.outputs.url }}
