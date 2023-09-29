@@ -92,8 +92,8 @@ jobs:
 
       - name: Build and Push Container
         run: |-
-          docker build -t "${{ env.AR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/github-actions-test/python-flask:${{ github.sha }}" ./
-          docker push "${{ env.AR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/github-actions-test/python-flask:${{ github.sha }}"
+          docker build -t '${{ env.AR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/github-actions-test/python-flask:${{ github.sha }}' ./
+          docker push '${{ env.AR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/github-actions-test/python-flask:${{ github.sha }}'
 
       - name: Show Output
         run: echo ${{ steps.deploy.outputs.url }}
