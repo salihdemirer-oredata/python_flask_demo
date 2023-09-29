@@ -49,8 +49,8 @@ on:
     branches: [ "main" ]
 
 env:
-  PROJECT_ID: 'oredata-ops-demo' # TODO: update Google Cloud project id
-  GAR_LOCATION: 'europe-west1' # TODO: update Artifact Registry location
+  PROJECT_ID: '${{ secrets.GCP_PROJ_ID }}' # TODO: update Google Cloud project id
+  GAR_LOCATION: '${{ env.LOCATION }}' # TODO: update Artifact Registry location
 
 jobs:
   deploy:
