@@ -57,6 +57,6 @@ jobs:
           service: ${{ env.SERVICE }}
           region: ${{ env.REGION }}
           # NOTE: If using a pre-built image, update the image name here
-          image: ${{ vars.LOCATION }}-docker.pkg.dev/${{ vars.PROJECT_ID }}//github-actions-test/${{ env.SERVICE }}:${{ github.sha }}
+          image: ${{ vars.LOCATION }}-docker.pkg.dev/${{ vars.PROJECT_ID }}/github-actions-test/${{ env.SERVICE }}:${{ github.sha }}
       - name: Show Output
         run: echo ${{ steps.deploy.outputs.url }}
