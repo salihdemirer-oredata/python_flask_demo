@@ -48,7 +48,7 @@ jobs:
 
       - name: Build and Push Container
         run: |-
-          docker build -t "${{ vars.LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJ_ID }}/github-actions-test/python-flask:${{ github.sha }}" /
+          docker build -t "${{ vars.LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJ_ID }}/github-actions-test/python-flask:${{ github.sha }}" ./
           docker push "${{ vars.LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJ_ID }}/github-actions-test/python-flask:${{ github.sha }}"
       - name: Show Output
         run: echo ${{ steps.deploy.outputs.url }}
