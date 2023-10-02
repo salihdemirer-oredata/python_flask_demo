@@ -1,3 +1,4 @@
+import Flask
 from flaskext.mysql import MySQL 
 import os
 
