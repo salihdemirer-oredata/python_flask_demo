@@ -1,5 +1,5 @@
-import Flask
-from flaskext.mysql import MySQL 
+from flask import Flask, render_template, request
+from flask_mysqldb import MySQL
 import os
 
 mysql = MySQL()
