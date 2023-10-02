@@ -1,5 +1,4 @@
-from flask import Flask
-from flask.ext.mysql import MySQL
+from flaskext.mysql import MySQL 
 import os
 
 mysql = MySQL()
@@ -23,4 +22,3 @@ def helloworld():
     return "Second version"
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 8080)))
-
