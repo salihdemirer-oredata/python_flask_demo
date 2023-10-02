@@ -2,13 +2,15 @@ from flask import Flask, render_template, request
 from flask_mysqldb import MySQL
 import os
 
-mysql = MySQL()
+
 app = Flask(__name__)
 
-app.config['MYSQL_DATABASE_USER'] = os.getenv("mysql_user")
-app.config['MYSQL_DATABASE_PASSWORD'] = os.getenv("mysql_password")
-app.config['MYSQL_DATABASE_DB'] = os.getenv("db")
-app.config['MYSQL_DATABASE_HOST'] = os.getenv("host")
+app.config['MYSQL_USER'] = os.getenv("mysql_user")
+app.config['MYSQL_PASSWORD'] = os.getenv("mysql_password")
+app.config['MYSQL_DB'] = os.getenv("db")
+app.config['MYSQL_HOST'] = os.getenv("host")
+
+mysql = MySQL(app)
 
 @app.route("/")
 def helloworld():
