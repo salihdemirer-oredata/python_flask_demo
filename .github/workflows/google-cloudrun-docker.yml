@@ -3,7 +3,9 @@ name: Push to Artifact Registry
 on:
   push:
     branches: [ "main" ]
-
+env:
+  SERVICE: 'test'
+  REGION: 'europe-west1'
 
 jobs:
   deploy:
@@ -47,5 +49,15 @@ jobs:
         run: |-
           docker build -t "${{ vars.LOCATION }}-docker.pkg.dev/${{ vars.PROJECT_ID }}/github-actions-test/python-flask:${{ github.sha }}" ./
           docker push "${{ vars.LOCATION }}-docker.pkg.dev/${{ vars.PROJECT_ID }}/github-actions-test/python-flask:${{ github.sha }}"
+
+      - name: Deploy to Cloud Run
+        id: deploy
+        uses: google-github-actions/deploy-cloudrun@v0
+        with:
+          service: ${{ env.SERVICE }}
+          region: ${{ env.REGION }}
+          # NOTE: If using a pre-built image, update the image name here
+          image: ${{ vars.LOCATION }}-docker.pkg.dev/${{ vars.PROJECT_ID }}/${{ env.SERVICE }}:${{ github.sha }}
+          
       - name: Show Output
         run: echo ${{ steps.deploy.outputs.url }}
