@@ -50,7 +50,7 @@ on:
 
 env:
   PROJECT_ID: '${{ secrets.GCP_PROJ_ID }}' # TODO: update Google Cloud project id
-  GAR_LOCATION: '${{ env.LOCATION }}' # TODO: update Artifact Registry location
+  GAR_LOCATION: '${{ vars.LOCATION }}' # TODO: update Artifact Registry location
 
 jobs:
   deploy:
