@@ -4,9 +4,6 @@ on:
   push:
     branches: [ "main" ]
 
-#env:
-#  PROJECT_ID: '${{ secrets.GCP_PROJ_ID }}' # TODO: update Google Cloud project id
- # GAR_LOCATION: '${{ vars.LOCATION }}' # TODO: update Artifact Registry location
 
 jobs:
   deploy:
@@ -48,7 +45,7 @@ jobs:
 
       - name: Build and Push Container
         run: |-
-          docker build -t "${{ vars.LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJ_ID }}/github-actions-test/python-flask:${{ github.sha }}" ./
-          docker push "${{ vars.LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJ_ID }}/github-actions-test/python-flask:${{ github.sha }}"
+          docker build -t "${{ vars.LOCATION }}-docker.pkg.dev/${{ vars.PROJECT_ID }}/github-actions-test/python-flask:${{ github.sha }}" ./
+          docker push "${{ vars.LOCATION }}-docker.pkg.dev/${{ vars.PROJECT_ID }}/github-actions-test/python-flask:${{ github.sha }}"
       - name: Show Output
         run: echo ${{ steps.deploy.outputs.url }}
