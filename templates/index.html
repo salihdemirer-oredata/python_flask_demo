@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>MySQL Web App</title>
+</head>
+<body>
+ <h1>Data from MySQL Database</h1>
+ <table>
+     <tr>
+        <th>Column 1</th>
+        <th>Column 2</th>
+        <!-- Add more table headers as needed -->
+     </tr>
+     {% for row in data %}
+        <tr>
+          <td>{{ row[0] }}</td>
+          <td>{{ row[1] }}</td>
+          <!-- Add more table data elements as needed -->
+        </tr>
+     {% endfor %}
+ </table>
+</body>
+</html>
