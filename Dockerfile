@@ -1,5 +1,4 @@
-FROM python:3-alpine
-RUN apk update && apk add pkgconfig build-deps gcc python3-dev musl-dev
+FROM python:3.11.6
 WORKDIR /app
 COPY requirements.txt ./
 RUN pip3 install -r requirements.txt
