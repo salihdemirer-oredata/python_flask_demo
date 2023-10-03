@@ -1,5 +1,5 @@
 FROM python:3-alpine
-RUN apk update && apk add pkgconfig python3-dev default-libmysqlclient-dev build-essential
+RUN apk update && apk add pkgconfig build-deps gcc python3-dev musl-dev
 WORKDIR /app
 COPY requirements.txt ./
 RUN pip3 install -r requirements.txt
