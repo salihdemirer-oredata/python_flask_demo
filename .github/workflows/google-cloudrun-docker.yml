@@ -59,9 +59,10 @@ jobs:
           # NOTE: If using a pre-built image, update the image name here
           image: ${{ vars.LOCATION }}-docker.pkg.dev/${{ vars.PROJECT_ID }}/github-actions-test/${{ env.SERVICE }}:${{ github.sha }}
           env_vars: |
-            mysql_user=${{ secrets.MYSQL_USER }}
-            mysql_password=${{ secrets.MYSQL_PASSWORD }}
-            db=${{ secrets.DB }}
-            host=${{ secrets.DB_HOST }}
+            MYSQL_USER=${{ secrets.MYSQL_USER }}
+            MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }}
+            MYSQL_DB=${{ secrets.DB }}
+            MYSQL_HOST=${{ secrets.DB_HOST }}
+            MYSQL_PORT=${{ secrets.MYSQL_PORT }}
       - name: Show Output
         run: echo ${{ steps.deploy.outputs.url }}
