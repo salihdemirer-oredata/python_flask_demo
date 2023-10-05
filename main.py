@@ -1,35 +1,76 @@
-from flask import Flask,render_template, request
-from flask_mysqldb import MySQL
+from flask import Flask, render_template, request
+from flask_sqlalchemy import SQLAlchemy
 import os
- 
+
 app = Flask(__name__)
- 
-app.config['MYSQL_HOST'] = os.getenv("MYSQL_HOST")
-app.config['MYSQL_USER'] = os.getenv("MYSQL_USER")
-app.config['MYSQL_PASSWORD'] = os.getenv("MYSQL_PASSWORD")
-app.config['MYSQL_DB'] = os.getenv("MYSQL_DB")
- 
-mysql = MySQL(app)
- 
+
+# PostgreSQL bağlantı bilgileri
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(app)
+
+class Info(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(255), nullable=False)
+    age = db.Column(db.Integer, nullable=False)
+
 @app.route('/form')
 def form():
     return render_template('form.html')
- 
-@app.route('/login', methods = ['POST', 'GET'])
+
+@app.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == 'GET':
         return "Login via the login Form"
-     
+
     if request.method == 'POST':
         name = request.form['name']
         age = request.form['age']
-        cursor = mysql.connection.cursor()
-        cursor.execute(''' INSERT INTO info_table VALUES(%s,%s)''',(name,age))
-        mysql.connection.commit()
-        cursor.close()
-        return f"Done!!"
+        
+        # PostgreSQL'a veri ekleme
+        new_info = Info(name=name, age=age)
+        db.session.add(new_info)
+        db.session.commit()
+
+        return "Done!!"
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=8080)
+
+#------
+# from flask import Flask,render_template, request
+# from flask_mysqldb import MySQL
+# import os
  
-app.run(host='0.0.0.0', port=8080)
+# app = Flask(__name__)
+ 
+# app.config['MYSQL_HOST'] = os.getenv("MYSQL_HOST")
+# app.config['MYSQL_USER'] = os.getenv("MYSQL_USER")
+# app.config['MYSQL_PASSWORD'] = os.getenv("MYSQL_PASSWORD")
+# app.config['MYSQL_DB'] = os.getenv("MYSQL_DB")
+ 
+# mysql = MySQL(app)
+ 
+# @app.route('/form')
+# def form():
+#     return render_template('form.html')
+ 
+# @app.route('/login', methods = ['POST', 'GET'])
+# def login():
+#     if request.method == 'GET':
+#         return "Login via the login Form"
+     
+#     if request.method == 'POST':
+#         name = request.form['name']
+#         age = request.form['age']
+#         cursor = mysql.connection.cursor()
+#         cursor.execute(''' INSERT INTO info_table VALUES(%s,%s)''',(name,age))
+#         mysql.connection.commit()
+#         cursor.close()
+#         return f"Done!!"
+ 
+# app.run(host='0.0.0.0', port=8080)
 
 
 # ---

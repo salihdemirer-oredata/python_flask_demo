@@ -59,6 +59,7 @@ jobs:
           # NOTE: If using a pre-built image, update the image name here
           image: ${{ vars.LOCATION }}-docker.pkg.dev/${{ vars.PROJECT_ID }}/github-actions-test/${{ env.SERVICE }}:${{ github.sha }}
           env_vars: |
+            DATABASE_URL=${{ secrets.DATABASE_URL }}
             MYSQL_USER=${{ secrets.MYSQL_USER }}
             MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }}
             MYSQL_DB=${{ secrets.DB }}
